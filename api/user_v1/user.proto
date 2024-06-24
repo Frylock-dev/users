@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package mock_v1;
+
+option go_package = "user/pkg/user_v1;user_v1";
+import "google/protobuf/timestamp.proto";
+
+message UserInfo {
+  string phone = 1;
+  string email = 2;
+  string firstName = 3;
+  string secondName = 4;
+  string lastName = 5;
+  uint32 passportNumber = 6;
+  uint32 passportCode = 7;
+  google.protobuf.Timestamp passportIssueDate = 8;
+  google.protobuf.Timestamp birthday = 9;
+}
+
+message User {
+  uint64 id = 1;
+  string uuid = 2;
+  UserInfo info = 3;
+}
+
+message CreateRequest {
+  UserInfo info = 1;
+}
+
+message CreateResponse {
+  string uuid = 1;
+}
+
+message GetByUUIDRequest {
+  string uuid = 1;
+}
+
+message GetByUUIDResponse {
+  User user = 1;
+}
+
+service UserService {
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc GetByUUID(GetByUUIDRequest) returns (GetByUUIDResponse);
+}

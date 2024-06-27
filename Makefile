@@ -19,6 +19,10 @@ PHONY: injection
 injection:
 	wire ./internal/injection
 
+PHONY: gen
+gen:
+	gen-user-api
+
 PHONY: gen-user-api
 gen-user-api:
 	mkdir -p pkg/user_v1
